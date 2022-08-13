@@ -1,14 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 
+import { fetchQuestions } from './utils/fetchQuestions';
 interface Question {
 	category: string;
 	id: string;
 	correctAnswer: string;
-}
-
-async function fetchQuestions() {
-	return await axios.get('https://the-trivia-api.com/api/questions?limit=5');
 }
 
 function App() {
