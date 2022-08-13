@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios, { AxiosResponse } from 'axios';
+import React, { useEffect, useState } from 'react';
+
+interface Question {
+	category: string;
+	id: string;
+	correctAnswer: string;
+}
+
+async function fetchQuestions() {
+	return await axios.get('https://the-trivia-api.com/api/questions?limit=5');
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [questions, setQuestions] = useState([]);
+
+	useEffect(() => {
+		fetchQuestions().then((response: AxiosResponse) => {
+			setQuestions(response.data);
+		});
+	}, []);
+
+	console.log(questions);
+	return (
+		<ul>
+			{questions.map((q: Question) => (
+				<li key={q.id}>
+					{q.category} {q.correctAnswer}
+				</li>
+			)) || 'Loading'}
+		</ul>
+	);
 }
 
 export default App;
+
+// [
+//   {
+//     "category": "History",
+//     "id": "622a1c367cc59eab6f950316",
+//     "correctAnswer": "Mumtaj Mahal",
+//     "incorrectAnswers": [
+//       "Taj Bodhi",
+//       "Lugah Taj",
+//       "Mahal Mahore"
+//     ],
+//     "question": "Who was the Taj Mahal built in memory of?",
+//     "tags": [
+//       "tourist_attractions",
+//       "india",
+//       "history"
+//     ],
+//     "type": "Multiple Choice",
+//     "difficulty": "hard",
+//     "regions": []
+//   },
