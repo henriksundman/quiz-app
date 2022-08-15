@@ -3,15 +3,24 @@ type AnswersProps = {
 	incorrectAnswers: string[];
 };
 
-const Answers = ({ correctAnswer, incorrectAnswers }: AnswersProps) => {
-	// function shuffleArray(arr: string[]): string[] {
-	// 	return arr.sort(() => Math.random() - 0.5);
-	// }
-	// let allAnswers = incorrectAnswers.concat(correctAnswer);
-	// console.log(allAnswers);
-	// let shuffledAnswers = shuffleArray(allAnswers);
-	// console.log(allAnswers);
+function shuffleArray(arr: string[]): void {
+	arr.sort(() => Math.random() - 0.5);
+}
 
-	return <button>answers</button>;
+const Answers = ({ correctAnswer, incorrectAnswers }: AnswersProps) => {
+	let allAnswers = incorrectAnswers.concat(correctAnswer);
+
+	shuffleArray(allAnswers);
+
+	return (
+		<form name="answers">
+			{allAnswers.map((answer: string) => (
+				<div key={answer}>
+					<input type="radio" name="answers" id={answer} value={answer} />
+					<label htmlFor={answer}>{answer}</label>
+				</div>
+			))}
+		</form>
+	);
 };
 export default Answers;
