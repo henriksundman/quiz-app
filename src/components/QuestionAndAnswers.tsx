@@ -23,10 +23,12 @@ function QuestionAndAnswers() {
 	const [questionCounter, setQuestionCounter] = useState(0);
 
 	useEffect(() => {
-		fetchQuestions().then((response: AxiosResponse) => {
-			setQuestions(response.data);
-			console.log(questions);
-		});
+		fetchQuestions()
+			.then((response: AxiosResponse) => {
+				setQuestions(response.data);
+				console.log(questions);
+			})
+			.catch((err) => console.log(err.message));
 	}, []);
 
 	let isLoading = questions.length === 0;
