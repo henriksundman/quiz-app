@@ -1,9 +1,9 @@
-interface AnswersProps {
+type AnswersProps = {
 	correctAnswer: string;
 	incorrectAnswers: string[];
-}
+};
 
-function Answers({ correctAnswer, incorrectAnswers }: AnswersProps) {
+const Answers = ({ correctAnswer, incorrectAnswers }: AnswersProps) => {
 	// function shuffleArray(arr: string[]): string[] {
 	// 	return arr.sort(() => Math.random() - 0.5);
 	// }
@@ -13,5 +13,5 @@ function Answers({ correctAnswer, incorrectAnswers }: AnswersProps) {
 	// console.log(allAnswers);
 
 	return <button>answers</button>;
-}
+};
 export default Answers;

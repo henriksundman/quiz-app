@@ -1,8 +1,8 @@
-interface QuestionProps {
+type QuestionProps = {
 	question?: string;
-}
+};
 
-export default function Question({ question }: QuestionProps) {
+const Question = ({ question }: QuestionProps) => {
 	let questionText = 'Loading...';
 
 	console.log(question);
@@ -12,4 +12,6 @@ export default function Question({ question }: QuestionProps) {
 	}
 
 	return <h1>{questionText}</h1>;
-}
+};
+
+export default Question;
