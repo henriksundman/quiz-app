@@ -5,10 +5,6 @@ interface CardProps {
 }
 
 function Card({ children }: CardProps) {
-	return (
-		<article className={styles['card-container']}>
-			<div className={styles.card}>{children}</div>
-		</article>
-	);
+	return <article className={styles.card}>{children}</article>;
 }
 export default Card;

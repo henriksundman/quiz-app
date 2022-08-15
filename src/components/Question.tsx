@@ -1,55 +1,15 @@
-import { AxiosResponse } from 'axios';
-
-import React, { useEffect, useState } from 'react';
-
-import { fetchQuestions } from '../utils/fetch-data';
-
-// TODO complete interface
-interface IQuestion {
-	category: string;
-	id: string;
-	correctAnswer: string;
+interface QuestionProps {
+	question?: string;
 }
 
-// TODO format question correctly
-export default function Question() {
-	const [questions, setQuestions] = useState([]);
+export default function Question({ question }: QuestionProps) {
+	let questionText = 'Loading...';
 
-	useEffect(() => {
-		fetchQuestions().then((response: AxiosResponse) => {
-			setQuestions(response.data);
-		});
-	}, []);
+	console.log(question);
 
-	console.log(questions);
-	return (
-		<ul>
-			{questions.map((q: IQuestion) => (
-				<li key={q.id}>
-					{q.category} {q.correctAnswer}
-				</li>
-			)) || 'Loading'}
-		</ul>
-	);
+	if (question) {
+		questionText = question;
+	}
+
+	return <h1>{questionText}</h1>;
 }
-
-// [
-//   {
-//     "category": "History",
-//     "id": "622a1c367cc59eab6f950316",
-//     "correctAnswer": "Mumtaj Mahal",
-//     "incorrectAnswers": [
-//       "Taj Bodhi",
-//       "Lugah Taj",
-//       "Mahal Mahore"
-//     ],
-//     "question": "Who was the Taj Mahal built in memory of?",
-//     "tags": [
-//       "tourist_attractions",
-//       "india",
-//       "history"
-//     ],
-//     "type": "Multiple Choice",
-//     "difficulty": "hard",
-//     "regions": []
-//   },
