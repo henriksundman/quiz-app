@@ -1,7 +1,7 @@
-type AnswersProps = {
+interface AnswersProps {
 	correctAnswer: string;
 	incorrectAnswers: string[];
-};
+}
 
 function shuffleArray(arr: string[]): void {
 	arr.sort(() => Math.random() - 0.5);

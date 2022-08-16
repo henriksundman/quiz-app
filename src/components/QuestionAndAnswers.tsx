@@ -18,7 +18,7 @@ interface IQuestion {
 	regions: string[];
 }
 
-function QuestionAndAnswers() {
+const QuestionAndAnswers = () => {
 	const [questions, setQuestions] = useState<IQuestion[]>([]);
 	const [questionCounter, setQuestionCounter] = useState(0);
 
@@ -47,5 +47,5 @@ function QuestionAndAnswers() {
 			)}
 		</Fragment>
 	);
-}
+};
 export default QuestionAndAnswers;

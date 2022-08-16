@@ -1,6 +1,6 @@
-type QuestionProps = {
+interface QuestionProps {
 	question?: string;
-};
+}
 
 const Question = ({ question }: QuestionProps) => {
 	let questionText = 'Loading...';
