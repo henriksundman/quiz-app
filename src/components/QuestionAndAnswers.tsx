@@ -26,11 +26,6 @@ const QuestionAndAnswers = () => {
 
 	const ctx = useContext(GameContext);
 
-	console.log(ctx.isGameStarted);
-
-	ctx.isGameStarted = true;
-	console.log(ctx.isGameStarted);
-
 	useEffect(() => {
 		(async () => {
 			try {
