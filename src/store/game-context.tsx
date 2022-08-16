@@ -13,7 +13,7 @@ export const GameContext = createContext<GameContextValue>({
 });
 
 export const GameContextProvider = ({ children }: Props) => {
-	const [isGameStarted, setIsGameStarted] = useState(false);
+	const [isGameStarted, setIsGameStarted] = useState(true);
 
 	const value = {
 		isGameStarted,

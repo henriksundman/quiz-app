@@ -1,3 +1,5 @@
+import classes from './Answers.module.css';
+
 interface AnswersProps {
 	correctAnswer: string;
 	incorrectAnswers: string[];
@@ -13,14 +15,13 @@ const Answers = ({ correctAnswer, incorrectAnswers }: AnswersProps) => {
 	shuffleArray(allAnswers);
 
 	return (
-		<form name="answers">
+		<>
 			{allAnswers.map((answer: string) => (
-				<div key={answer}>
-					<input type="radio" name="answers" id={answer} value={answer} />
-					<label htmlFor={answer}>{answer}</label>
+				<div key={answer} className={classes.btn}>
+					{answer}
 				</div>
 			))}
-		</form>
+		</>
 	);
 };
 export default Answers;
