@@ -1,5 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 
+import { ThreeDots } from 'react-loader-spinner';
+
 import { fetchQuestions } from '../utils/fetch-data';
 import Answers from './Answers';
 import Question from './Question';
@@ -35,7 +37,7 @@ const QuestionAndAnswers = () => {
 
 	return (
 		<Fragment>
-			{isLoading && <div>'Loading...'</div>}
+			{isLoading && <ThreeDots color="#00BFFF" height={80} width={80} />}
 			{!isLoading && (
 				<Fragment>
 					<Question question={questions[questionCounter].question} />
