@@ -1,10 +1,12 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 
 import { ThreeDots } from 'react-loader-spinner';
 
 import { fetchQuestions } from '../utils/fetch-data';
 import Answers from './Answers';
 import Question from './Question';
+
+import { GameContext } from '../store/game-context';
 
 interface IQuestion {
 	category: string;
@@ -22,8 +24,15 @@ const QuestionAndAnswers = () => {
 	const [questions, setQuestions] = useState<IQuestion[]>([]);
 	const [questionCounter, setQuestionCounter] = useState(0);
 
+	const ctx = useContext(GameContext);
+
+	console.log(ctx.isGameStarted);
+
+	ctx.isGameStarted = true;
+	console.log(ctx.isGameStarted);
+
 	useEffect(() => {
-		(async function getQuestions() {
+		(async () => {
 			try {
 				const response = await fetchQuestions();
 				setQuestions(response.data);
