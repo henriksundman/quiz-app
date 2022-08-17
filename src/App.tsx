@@ -11,6 +11,8 @@ import StartScreen from './components/StartScreen';
 function App() {
 	const gameCtx = useContext(GameContext);
 
+	console.log(gameCtx);
+
 	return (
 		<Fragment>
 			<Card>

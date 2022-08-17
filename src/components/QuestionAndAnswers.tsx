@@ -7,18 +7,7 @@ import Answers from './Answers';
 import Question from './Question';
 
 import { GameContext } from '../store/game-context';
-
-interface IQuestion {
-	category: string;
-	id: string;
-	correctAnswer: string;
-	incorrectAnswers: string[];
-	question: string;
-	tags: string[];
-	type: string;
-	difficulty: string;
-	regions: string[];
-}
+import { IQuestion } from '../interfaces/IQuestion';
 
 const QuestionAndAnswers = () => {
 	const [questions, setQuestions] = useState<IQuestion[]>([]);
