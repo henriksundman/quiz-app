@@ -1,4 +1,4 @@
-import { useState, createContext, ReactNode } from 'react';
+import { useState, createContext, ReactNode, useCallback } from 'react';
 import { IGameState } from '../interfaces/IGameState';
 import { IQuestion } from '../interfaces/IQuestion';
 import { fetchQuestions } from '../utils/fetch-data';
@@ -9,35 +9,36 @@ interface Props {
 export const GameContext = createContext<IGameState>({
 	isGameStarted: false,
 	numberOfQuestions: 5,
-	onGameStartHandler: () => {},
+	onGameStartHandler: (numQuestions: number) => {},
 	numberOfCorrectAnswers: 0,
 	onAddCorrectAnswers: () => {},
 	questions: [],
-	onLoadQuestions: () => {},
+	onLoadQuestions: (numQuestions: number) => {},
 });
 
 export const GameContextProvider = ({ children }: Props) => {
 	const [isGameStarted, setIsGameStarted] = useState(false);
 	const [numberOfQuestions, setNumberOfQuestions] = useState(5);
 	const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0);
-	const [questions, setQuestions] = useState([]);
+	const [questions, setQuestions] = useState<IQuestion[]>([]);
 
-	const onGameStartHandler = (): void => {
+	const onGameStartHandler = (numQuestions: number): void => {
 		setIsGameStarted(true);
+		setNumberOfQuestions(numQuestions);
 	};
 
 	const onAddCorrectAnswers = (): void => {
 		setNumberOfCorrectAnswers((prevState: number) => prevState + 1);
 	};
 
-	const onLoadQuestions = async () => {
+	const onLoadQuestions = useCallback(async (numberOfQuestions: number) => {
 		try {
-			const response = await fetchQuestions();
+			const response = await fetchQuestions(numberOfQuestions);
 			setQuestions(response.data);
 		} catch (error: any) {
 			console.log(error.message);
 		}
-	};
+	}, []);
 
 	const value = {
 		isGameStarted,

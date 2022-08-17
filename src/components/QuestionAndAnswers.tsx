@@ -1,32 +1,25 @@
 import { Fragment, useContext, useEffect, useState } from 'react';
-
 import { ThreeDots } from 'react-loader-spinner';
 
-import { fetchQuestions } from '../utils/fetch-data';
+import { GameContext } from '../store/game-context';
 import Answers from './Answers';
 import Question from './Question';
 
-import { GameContext } from '../store/game-context';
-import { IQuestion } from '../interfaces/IQuestion';
-
 const QuestionAndAnswers = () => {
-	const [questions, setQuestions] = useState<IQuestion[]>([]);
 	const [questionCounter, setQuestionCounter] = useState(0);
 
-	const ctx = useContext(GameContext);
+	const { onLoadQuestions, numberOfQuestions, questions } =
+		useContext(GameContext);
 
 	useEffect(() => {
-		(async () => {
-			try {
-				const response = await fetchQuestions();
-				setQuestions(response.data);
-			} catch (error: any) {
-				console.log(error.message);
-			}
-		})();
-	}, []);
+		onLoadQuestions(numberOfQuestions);
+	}, [numberOfQuestions, onLoadQuestions]);
 
 	let isLoading = questions.length === 0;
+
+	const clickAnswerHandler = () => {
+		setQuestionCounter((prevCount: number) => prevCount + 1);
+	};
 
 	return (
 		<Fragment>
@@ -37,6 +30,7 @@ const QuestionAndAnswers = () => {
 					<Answers
 						correctAnswer={questions[questionCounter].correctAnswer}
 						incorrectAnswers={questions[questionCounter].incorrectAnswers}
+						onClickAnswer={clickAnswerHandler}
 					/>
 				</Fragment>
 			)}
