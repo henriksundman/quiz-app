@@ -1,6 +1,6 @@
-import { Fragment, useContext, useRef, useState } from 'react';
-import { GameContext } from '../store/game-context';
+import { Fragment, useContext, useState } from 'react';
 
+import { GameContext } from '../store/game-context';
 import classes from './StartScreen.module.css';
 
 const StartScreen = () => {

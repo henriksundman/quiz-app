@@ -17,7 +17,6 @@ const Answers = ({
 	onClickAnswer,
 }: AnswersProps) => {
 	let allAnswers = incorrectAnswers.concat(correctAnswer);
-
 	shuffleArray(allAnswers);
 
 	return (
