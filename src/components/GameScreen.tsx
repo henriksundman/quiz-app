@@ -18,6 +18,8 @@ const checkAnswer = (chosenAnswer: string, correctAnswer: string) => {
 
 export const GameScreen = () => {
 	const [questionCounter, setQuestionCounter] = useState(0);
+	const [isAnswered, setIsAnswered] = useState(false);
+	const [selectedAnswer, setSelectedAnswer] = useState('');
 
 	const { loadQuestions, numberOfQuestions, questions } =
 		useContext(GameContext);
@@ -29,18 +31,18 @@ export const GameScreen = () => {
 	let isLoading = questions.length === 0;
 
 	const clickAnswerHandler = (event: SyntheticEvent) => {
-		setQuestionCounter((prevCount: number) => prevCount + 1);
+		// setQuestionCounter((prevCount: number) => prevCount + 1);
+		setIsAnswered(true);
 
 		const chosenAnswer = event.currentTarget.textContent;
 
+		chosenAnswer && setSelectedAnswer(chosenAnswer);
+		const correctAnswer = questions[questionCounter].correctAnswer;
+
 		let isAnswerCorrect;
 		if (chosenAnswer) {
-			isAnswerCorrect = checkAnswer(
-				chosenAnswer,
-				questions[questionCounter].correctAnswer
-			);
+			isAnswerCorrect = checkAnswer(chosenAnswer, correctAnswer);
 		}
-		console.log(isAnswerCorrect);
 	};
 
 	return (
@@ -53,6 +55,8 @@ export const GameScreen = () => {
 						correctAnswer={questions[questionCounter].correctAnswer}
 						incorrectAnswers={questions[questionCounter].incorrectAnswers}
 						onClickAnswer={clickAnswerHandler}
+						isAnswered={isAnswered}
+						chosenAnswer={selectedAnswer}
 					/>
 				</Fragment>
 			)}
