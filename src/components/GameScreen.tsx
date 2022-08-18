@@ -1,10 +1,20 @@
-import { Fragment, useContext, useEffect, useState } from 'react';
+import {
+	Fragment,
+	SyntheticEvent,
+	useContext,
+	useEffect,
+	useState,
+} from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 
 import { GameContext } from '../store/game-context';
 import { Answers } from './Answers';
 import { Question } from './Question';
 import { Card } from './ui/Card';
+
+const checkAnswer = (chosenAnswer: string, correctAnswer: string) => {
+	return chosenAnswer === correctAnswer;
+};
 
 export const GameScreen = () => {
 	const [questionCounter, setQuestionCounter] = useState(0);
@@ -18,8 +28,19 @@ export const GameScreen = () => {
 
 	let isLoading = questions.length === 0;
 
-	const clickAnswerHandler = () => {
+	const clickAnswerHandler = (event: SyntheticEvent) => {
 		setQuestionCounter((prevCount: number) => prevCount + 1);
+
+		const chosenAnswer = event.currentTarget.textContent;
+
+		let isAnswerCorrect;
+		if (chosenAnswer) {
+			isAnswerCorrect = checkAnswer(
+				chosenAnswer,
+				questions[questionCounter].correctAnswer
+			);
+		}
+		console.log(isAnswerCorrect);
 	};
 
 	return (

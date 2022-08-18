@@ -7,14 +7,12 @@ import StartScreen from './components/StartScreen';
 import { GameContext } from './store/game-context';
 
 const App = () => {
-	const gameCtx = useContext(GameContext);
-
-	console.log(gameCtx);
+	const { isGameStarted } = useContext(GameContext);
 
 	return (
 		<Fragment>
-			{!gameCtx.isGameStarted && <StartScreen />}
-			{gameCtx.isGameStarted && <GameScreen />}
+			{!isGameStarted && <StartScreen />}
+			{isGameStarted && <GameScreen />}
 		</Fragment>
 	);
 };

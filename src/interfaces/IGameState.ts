@@ -1,3 +1,4 @@
+import { SyntheticEvent } from 'react';
 import { IQuestion } from './IQuestion';
 
 export interface IGameState {

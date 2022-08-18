@@ -1,10 +1,10 @@
-import { Fragment } from 'react';
+import { Fragment, SyntheticEvent } from 'react';
 import classes from './Answers.module.css';
 
 interface AnswersProps {
 	correctAnswer: string;
 	incorrectAnswers: string[];
-	onClickAnswer: () => void;
+	onClickAnswer: (event: SyntheticEvent) => void;
 }
 
 function shuffleArray(arr: string[]): void {
