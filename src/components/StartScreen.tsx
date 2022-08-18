@@ -1,7 +1,8 @@
-import { Fragment, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { GameContext } from '../store/game-context';
 import classes from './StartScreen.module.css';
+import { Card } from './ui/Card';
 
 const StartScreen = () => {
 	const gameCtx = useContext(GameContext);
@@ -12,7 +13,7 @@ const StartScreen = () => {
 	};
 
 	return (
-		<Fragment>
+		<Card>
 			<h1>Welcome to the Quiz!</h1>
 			<p>Select number of questions (max 50)</p>
 			<p className={classes.number}>{numQuestions}</p>
@@ -34,7 +35,7 @@ const StartScreen = () => {
 			</div>
 			<p>Press Start to begin</p>
 			<button onClick={start}>Start</button>
-		</Fragment>
+		</Card>
 	);
 };
 export default StartScreen;

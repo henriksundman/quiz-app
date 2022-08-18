@@ -11,7 +11,7 @@ function shuffleArray(arr: string[]): void {
 	arr.sort(() => Math.random() - 0.5);
 }
 
-const Answers = ({
+export const Answers = ({
 	correctAnswer,
 	incorrectAnswers,
 	onClickAnswer,
@@ -29,4 +29,3 @@ const Answers = ({
 		</Fragment>
 	);
 };
-export default Answers;

@@ -4,7 +4,6 @@ interface CardProps {
 	children?: React.ReactNode;
 }
 
-const Card = ({ children }: CardProps) => {
+export const Card = ({ children }: CardProps) => {
 	return <article className={styles.card}>{children}</article>;
 };
-export default Card;

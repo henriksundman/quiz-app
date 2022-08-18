@@ -13,7 +13,7 @@ export const GameContext = createContext<IGameState>({
 	numberOfCorrectAnswers: 0,
 	onAddCorrectAnswers: () => {},
 	questions: [],
-	onLoadQuestions: (numQuestions: number) => {},
+	loadQuestions: (numQuestions: number) => {},
 });
 
 export const GameContextProvider = ({ children }: Props) => {
@@ -28,10 +28,10 @@ export const GameContextProvider = ({ children }: Props) => {
 	};
 
 	const onAddCorrectAnswers = (): void => {
-		setNumberOfCorrectAnswers((prevState: number) => prevState + 1);
+		setNumberOfCorrectAnswers((prevNum: number) => prevNum + 1);
 	};
 
-	const onLoadQuestions = useCallback(async (numberOfQuestions: number) => {
+	const loadQuestions = useCallback(async (numberOfQuestions: number) => {
 		try {
 			const response = await fetchQuestions(numberOfQuestions);
 			setQuestions(response.data);
@@ -47,7 +47,7 @@ export const GameContextProvider = ({ children }: Props) => {
 		numberOfCorrectAnswers,
 		onAddCorrectAnswers,
 		questions,
-		onLoadQuestions,
+		loadQuestions,
 	};
 
 	return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

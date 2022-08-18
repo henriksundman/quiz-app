@@ -2,11 +2,9 @@ import './app.css';
 
 import { Fragment, useContext } from 'react';
 
-import QuestionAndAnswers from './components/GameScreen';
-import Card from './components/ui/Card';
-
-import { GameContext } from './store/game-context';
+import { GameScreen } from './components/GameScreen';
 import StartScreen from './components/StartScreen';
+import { GameContext } from './store/game-context';
 
 const App = () => {
 	const gameCtx = useContext(GameContext);
@@ -15,10 +13,8 @@ const App = () => {
 
 	return (
 		<Fragment>
-			<Card>
-				{!gameCtx.isGameStarted && <StartScreen />}
-				{gameCtx.isGameStarted && <QuestionAndAnswers />}
-			</Card>
+			{!gameCtx.isGameStarted && <StartScreen />}
+			{gameCtx.isGameStarted && <GameScreen />}
 		</Fragment>
 	);
 };

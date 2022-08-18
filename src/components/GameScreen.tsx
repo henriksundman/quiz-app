@@ -2,18 +2,19 @@ import { Fragment, useContext, useEffect, useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 
 import { GameContext } from '../store/game-context';
-import Answers from './Answers';
-import Question from './Question';
+import { Answers } from './Answers';
+import { Question } from './Question';
+import { Card } from './ui/Card';
 
-const QuestionAndAnswers = () => {
+export const GameScreen = () => {
 	const [questionCounter, setQuestionCounter] = useState(0);
 
-	const { onLoadQuestions, numberOfQuestions, questions } =
+	const { loadQuestions, numberOfQuestions, questions } =
 		useContext(GameContext);
 
 	useEffect(() => {
-		onLoadQuestions(numberOfQuestions);
-	}, [numberOfQuestions, onLoadQuestions]);
+		loadQuestions(numberOfQuestions);
+	}, [numberOfQuestions, loadQuestions]);
 
 	let isLoading = questions.length === 0;
 
@@ -22,7 +23,7 @@ const QuestionAndAnswers = () => {
 	};
 
 	return (
-		<Fragment>
+		<Card>
 			{isLoading && <ThreeDots color="#00BFFF" height={80} width={80} />}
 			{!isLoading && (
 				<Fragment>
@@ -34,7 +35,6 @@ const QuestionAndAnswers = () => {
 					/>
 				</Fragment>
 			)}
-		</Fragment>
+		</Card>
 	);
 };
-export default QuestionAndAnswers;

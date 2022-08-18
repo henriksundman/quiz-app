@@ -7,5 +7,5 @@ export interface IGameState {
 	numberOfCorrectAnswers: number;
 	onAddCorrectAnswers: () => void;
 	questions: IQuestion[];
-	onLoadQuestions: (numQuestions: number) => void;
+	loadQuestions: (numQuestions: number) => void;
 }
