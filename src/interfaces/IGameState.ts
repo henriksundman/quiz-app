@@ -5,9 +5,11 @@ export interface IGameState {
 	gameStartHandler: (numQuestions: number) => void;
 	numberOfCorrectAnswers: number;
 	addCorrectAnswers: () => void;
-	numberOfIncorrectAnswers: Number;
+	numberOfIncorrectAnswers: number;
 	addIncorrectAnswers: () => void;
 	questions: IQuestion[];
 	loadQuestions: (numQuestions: number) => void;
 	error: string;
+	isGameOver: boolean;
+	gameOver: () => void;
 }

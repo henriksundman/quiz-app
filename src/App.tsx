@@ -5,14 +5,20 @@ import { Fragment, useContext } from 'react';
 import { GameScreen } from './components/GameScreen/GameScreen';
 import StartScreen from './components/StartScreen/StartScreen';
 import { GameContext } from './store/game-context';
+import { GameOverScreen } from './components/GameOverScreen/GameOverScreen';
 
 const App = () => {
-	const { isGameStarted } = useContext(GameContext);
+	const { isGameStarted, isGameOver } = useContext(GameContext);
+
+	const gameNotStarted = !isGameStarted && !isGameOver;
+	const gameIsStarted = isGameStarted && !isGameOver;
+	const gameIsOver = isGameOver;
 
 	return (
 		<Fragment>
-			{!isGameStarted && <StartScreen />}
-			{isGameStarted && <GameScreen />}
+			{gameNotStarted && <StartScreen />}
+			{gameIsStarted && <GameScreen />}
+			{gameIsOver && <GameOverScreen />}
 		</Fragment>
 	);
 };

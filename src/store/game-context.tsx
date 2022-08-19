@@ -17,6 +17,8 @@ export const GameContext = createContext<IGameState>({
 	questions: [],
 	loadQuestions: (numQuestions: number) => {},
 	error: '',
+	isGameOver: false,
+	gameOver: () => {},
 });
 
 export const GameContextProvider = ({ children }: Props) => {
@@ -26,6 +28,7 @@ export const GameContextProvider = ({ children }: Props) => {
 	const [numberOfIncorrectAnswers, setNumberOfIncorrectAnswers] = useState(0);
 	const [questions, setQuestions] = useState<IQuestion[]>([]);
 	const [error, setError] = useState('');
+	const [isGameOver, setIsGameOver] = useState(false);
 
 	const gameStartHandler = (numQuestions: number): void => {
 		setIsGameStarted(true);
@@ -49,6 +52,10 @@ export const GameContextProvider = ({ children }: Props) => {
 		}
 	}, []);
 
+	const gameOver = () => {
+		setIsGameOver(true);
+	};
+
 	const value = {
 		isGameStarted,
 		numberOfQuestions,
@@ -60,6 +67,8 @@ export const GameContextProvider = ({ children }: Props) => {
 		questions,
 		loadQuestions,
 		error,
+		isGameOver,
+		gameOver,
 	};
 
 	return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

@@ -27,6 +27,9 @@ export const GameScreen = () => {
 		questions,
 		error,
 		addCorrectAnswers,
+		addIncorrectAnswers,
+		isGameOver,
+		gameOver,
 	} = useContext(GameContext);
 
 	useEffect(() => {
@@ -51,10 +54,15 @@ export const GameScreen = () => {
 
 		if (isAnswerCorrect) {
 			addCorrectAnswers();
+		} else {
+			addIncorrectAnswers();
 		}
 	};
 
 	const clickNextHandler = () => {
+		if (questionCounter === questions.length - 1) {
+			return gameOver();
+		}
 		setQuestionCounter((prevCount: number) => prevCount + 1);
 		setIsAnswered(false);
 	};
@@ -63,9 +71,10 @@ export const GameScreen = () => {
 		<Fragment>
 			<ScoreBoard currentQuestionIndex={questionCounter} />
 			<Card>
+				{isGameOver && <h1>Game Is Over</h1>}
 				{error && <h1>Something went wrong. Please try again later.</h1>}
 				{isLoading && <ThreeDots color="#ccc" height={80} width={80} />}
-				{!isLoading && !error && (
+				{!isLoading && !error && !isGameOver && (
 					<Fragment>
 						<Question question={questions[questionCounter].question} />
 						<Answers

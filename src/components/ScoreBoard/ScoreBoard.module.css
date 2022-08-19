@@ -1,3 +1,6 @@
+body {
+	margin-block-start: -20px;
+}
 .container {
 	width: 90%;
 	display: flex;
@@ -11,7 +14,8 @@
 	color: green;
 }
 
-.x-mark {
+.xmark {
+	padding-inline-end: 10%;
 	width: 20px;
 	color: red;
 }

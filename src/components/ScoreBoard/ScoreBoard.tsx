@@ -12,19 +12,23 @@ interface ScoreBoardProps {
 export const ScoreBoard = ({ currentQuestionIndex }: ScoreBoardProps) => {
 	const gameCtx = useContext(GameContext);
 
-	const { numberOfQuestions, numberOfCorrectAnswers } = gameCtx;
-
-	const numberIncorrectAnswers = currentQuestionIndex - numberOfCorrectAnswers;
+	const {
+		numberOfQuestions,
+		numberOfCorrectAnswers,
+		numberOfIncorrectAnswers,
+	} = gameCtx;
 
 	return (
 		<Card>
-			<div className={classes.container}>
-				<div className={classes.checkmark}>✓{numberOfCorrectAnswers}</div>
-				<div className="">
-					{currentQuestionIndex + 1}/{numberOfQuestions}
+			<>
+				<div className={classes.container}>
+					<p className={classes.checkmark}>✓{numberOfCorrectAnswers}</p>
+					<p>
+						{currentQuestionIndex + 1}/{numberOfQuestions}
+					</p>
+					<p className={classes.xmark}>❌{numberOfIncorrectAnswers}</p>
 				</div>
-				<div className={classes['x-mark']}>❌{numberIncorrectAnswers}</div>
-			</div>
+			</>
 		</Card>
 	);
 };
