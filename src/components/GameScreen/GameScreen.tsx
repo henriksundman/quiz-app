@@ -7,11 +7,11 @@ import {
 } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 
-import { GameContext } from '../store/game-context';
-import { Answers } from './Answers';
-import { Question } from './Question';
-import { Button } from './ui/Button';
-import { Card } from './ui/Card';
+import { GameContext } from '../../store/game-context';
+import { Answers } from '../Answers/Answers';
+import { Question } from '../Question/Question';
+import { Button } from '../ui/Button';
+import { Card } from '../ui/Card';
 
 const checkAnswer = (chosenAnswer: string, correctAnswer: string) => {
 	return chosenAnswer === correctAnswer;

@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 
-import { GameContext } from '../store/game-context';
+import { GameContext } from '../../store/game-context';
 import classes from './StartScreen.module.css';
-import { Card } from './ui/Card';
+import { Card } from '../ui/Card';
 
 const StartScreen = () => {
 	const gameCtx = useContext(GameContext);

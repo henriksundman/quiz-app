@@ -1,7 +1,7 @@
 import { Fragment, SyntheticEvent, useState } from 'react';
 
 import classes from './Answers.module.css';
-import { Button } from './ui/Button';
+import { Button } from '../ui/Button';
 
 interface AnswersProps {
 	correctAnswer: string;
@@ -30,11 +30,9 @@ export const Answers = ({
 		setShuffledAnswers(shuffleArray(allAnswers));
 		setIsShuffled(true);
 	}
-	console.log(chosenAnswer);
+
 	const correctAnswerIndex = shuffledAnswers.indexOf(correctAnswer);
 	const chosenAnswerIndex = shuffledAnswers.indexOf(chosenAnswer);
-
-	console.log('chosen: ' + chosenAnswerIndex);
 
 	return (
 		<Fragment>
@@ -43,20 +41,17 @@ export const Answers = ({
 					const isCorrectAnswer = index === correctAnswerIndex;
 					const isTheClickedButton = index === chosenAnswerIndex;
 
+					let styles = '';
+					if (isAnswered) {
+						styles = isCorrectAnswer ? classes.correct : classes.incorrect;
+						styles = isTheClickedButton
+							? `${styles} ${classes.clicked}`
+							: styles;
+						styles = `${styles} ${classes.disabled}`;
+					}
+
 					return (
-						<Button
-							key={answer}
-							customStyles={`${classes.btn} ${
-								isAnswered
-									? isCorrectAnswer
-										? classes.correct
-										: classes.incorrect
-									: ''
-							} ${
-								isAnswered ? (isTheClickedButton ? classes.clicked : '') : ''
-							} ${isAnswered && classes.disabled} `}
-							onClick={onClickAnswer}
-						>
+						<Button key={answer} customStyles={styles} onClick={onClickAnswer}>
 							{answer}
 						</Button>
 					);
