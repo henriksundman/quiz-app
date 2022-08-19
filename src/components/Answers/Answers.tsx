@@ -3,16 +3,14 @@ import { Fragment, SyntheticEvent, useState } from 'react';
 import classes from './Answers.module.css';
 import { Button } from '../ui/Button';
 
+import { shuffleArray } from './answersUtils';
+
 interface AnswersProps {
 	correctAnswer: string;
 	incorrectAnswers: string[];
 	isAnswered: boolean;
 	chosenAnswer: string;
 	onClickAnswer: (event: SyntheticEvent) => void;
-}
-
-function shuffleArray(arr: string[]): string[] {
-	return arr.slice(0, arr.length).sort(() => Math.random() - 0.5);
 }
 
 export const Answers = ({
@@ -24,8 +22,17 @@ export const Answers = ({
 }: AnswersProps) => {
 	const [isShuffled, setIsShuffled] = useState(false);
 	const [shuffledAnswers, setShuffledAnswers] = useState<string[]>([]);
+	const [previousCorrectAnswer, setPreviousCorrectAnswer] = useState('');
+
+	if (previousCorrectAnswer === '') {
+		setPreviousCorrectAnswer(correctAnswer);
+	} else if (previousCorrectAnswer !== correctAnswer) {
+		setIsShuffled(false);
+		setPreviousCorrectAnswer(correctAnswer);
+	}
 
 	const allAnswers = incorrectAnswers.concat(correctAnswer);
+
 	if (!isShuffled) {
 		setShuffledAnswers(shuffleArray(allAnswers));
 		setIsShuffled(true);

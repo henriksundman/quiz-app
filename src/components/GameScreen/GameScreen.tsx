@@ -13,14 +13,13 @@ import { Question } from '../Question/Question';
 import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
 
-const checkAnswer = (chosenAnswer: string, correctAnswer: string) => {
-	return chosenAnswer === correctAnswer;
-};
+import { checkAnswer } from './gameScreenUtils';
 
 export const GameScreen = () => {
 	const [questionCounter, setQuestionCounter] = useState(0);
 	const [isAnswered, setIsAnswered] = useState(false);
 	const [selectedAnswer, setSelectedAnswer] = useState('');
+	const [reset, setReset] = useState(false);
 
 	const { loadQuestions, numberOfQuestions, questions } =
 		useContext(GameContext);
@@ -29,10 +28,9 @@ export const GameScreen = () => {
 		loadQuestions(numberOfQuestions);
 	}, [numberOfQuestions, loadQuestions]);
 
-	let isLoading = questions.length === 0;
+	const isLoading = questions.length === 0;
 
 	const clickAnswerHandler = (event: SyntheticEvent) => {
-		// setQuestionCounter((prevCount: number) => prevCount + 1);
 		setIsAnswered(true);
 
 		const chosenAnswer = event.currentTarget.textContent;
@@ -44,6 +42,11 @@ export const GameScreen = () => {
 		if (chosenAnswer) {
 			isAnswerCorrect = checkAnswer(chosenAnswer, correctAnswer);
 		}
+	};
+
+	const clickNextHandler = () => {
+		setQuestionCounter((prevCount: number) => prevCount + 1);
+		setIsAnswered(false);
 	};
 
 	return (
@@ -61,7 +64,7 @@ export const GameScreen = () => {
 					/>
 				</Fragment>
 			)}
-			{isAnswered && <Button>Next Question</Button>}
+			{isAnswered && <Button onClick={clickNextHandler}>Next Question</Button>}
 		</Card>
 	);
 };
