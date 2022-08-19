@@ -14,6 +14,7 @@ export const GameContext = createContext<IGameState>({
 	onAddCorrectAnswers: () => {},
 	questions: [],
 	loadQuestions: (numQuestions: number) => {},
+	error: '',
 });
 
 export const GameContextProvider = ({ children }: Props) => {
@@ -21,6 +22,7 @@ export const GameContextProvider = ({ children }: Props) => {
 	const [numberOfQuestions, setNumberOfQuestions] = useState(5);
 	const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0);
 	const [questions, setQuestions] = useState<IQuestion[]>([]);
+	const [error, setError] = useState('');
 
 	const onGameStartHandler = (numQuestions: number): void => {
 		setIsGameStarted(true);
@@ -36,7 +38,7 @@ export const GameContextProvider = ({ children }: Props) => {
 			const response = await fetchQuestions(numberOfQuestions);
 			setQuestions(response.data);
 		} catch (error: any) {
-			console.log(error.message);
+			setError(error.message);
 		}
 	}, []);
 
@@ -48,6 +50,7 @@ export const GameContextProvider = ({ children }: Props) => {
 		onAddCorrectAnswers,
 		questions,
 		loadQuestions,
+		error,
 	};
 
 	return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

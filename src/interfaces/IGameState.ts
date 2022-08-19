@@ -1,6 +1,4 @@
-import { SyntheticEvent } from 'react';
 import { IQuestion } from './IQuestion';
-
 export interface IGameState {
 	isGameStarted: boolean;
 	numberOfQuestions: number;
@@ -9,4 +7,5 @@ export interface IGameState {
 	onAddCorrectAnswers: () => void;
 	questions: IQuestion[];
 	loadQuestions: (numQuestions: number) => void;
+	error: string;
 }

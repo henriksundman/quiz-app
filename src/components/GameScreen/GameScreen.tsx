@@ -10,6 +10,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import { GameContext } from '../../store/game-context';
 import { Answers } from '../Answers/Answers';
 import { Question } from '../Question/Question';
+import { ScoreBoard } from '../ScoreBoard/ScoreBoard';
 import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
 
@@ -19,16 +20,16 @@ export const GameScreen = () => {
 	const [questionCounter, setQuestionCounter] = useState(0);
 	const [isAnswered, setIsAnswered] = useState(false);
 	const [selectedAnswer, setSelectedAnswer] = useState('');
-	const [reset, setReset] = useState(false);
 
-	const { loadQuestions, numberOfQuestions, questions } =
+	const { loadQuestions, numberOfQuestions, questions, error } =
 		useContext(GameContext);
 
 	useEffect(() => {
 		loadQuestions(numberOfQuestions);
 	}, [numberOfQuestions, loadQuestions]);
 
-	const isLoading = questions.length === 0;
+	let isLoading = questions.length === 0;
+	isLoading = error ? false : isLoading;
 
 	const clickAnswerHandler = (event: SyntheticEvent) => {
 		setIsAnswered(true);
@@ -50,21 +51,27 @@ export const GameScreen = () => {
 	};
 
 	return (
-		<Card>
-			{isLoading && <ThreeDots color="#00BFFF" height={80} width={80} />}
-			{!isLoading && (
-				<Fragment>
-					<Question question={questions[questionCounter].question} />
-					<Answers
-						correctAnswer={questions[questionCounter].correctAnswer}
-						incorrectAnswers={questions[questionCounter].incorrectAnswers}
-						onClickAnswer={clickAnswerHandler}
-						isAnswered={isAnswered}
-						chosenAnswer={selectedAnswer}
-					/>
-				</Fragment>
-			)}
-			{isAnswered && <Button onClick={clickNextHandler}>Next Question</Button>}
-		</Card>
+		<Fragment>
+			<ScoreBoard currentQuestionIndex={questionCounter} />
+			<Card>
+				{error && <h1>Something went wrong. Please try again later.</h1>}
+				{isLoading && <ThreeDots color="#ccc" height={80} width={80} />}
+				{!isLoading && !error && (
+					<Fragment>
+						<Question question={questions[questionCounter].question} />
+						<Answers
+							correctAnswer={questions[questionCounter].correctAnswer}
+							incorrectAnswers={questions[questionCounter].incorrectAnswers}
+							onClickAnswer={clickAnswerHandler}
+							isAnswered={isAnswered}
+							chosenAnswer={selectedAnswer}
+						/>
+					</Fragment>
+				)}
+				{isAnswered && (
+					<Button onClick={clickNextHandler}>Next Question</Button>
+				)}
+			</Card>
+		</Fragment>
 	);
 };

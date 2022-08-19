@@ -1,0 +1,18 @@
+.container {
+	width: 90%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	font-size: 1.35rem;
+}
+
+.checkmark {
+	display: flex;
+	width: 30px;
+	color: green;
+}
+
+.x-mark {
+	width: 20px;
+	color: red;
+}
