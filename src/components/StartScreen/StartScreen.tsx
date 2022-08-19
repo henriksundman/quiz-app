@@ -9,7 +9,7 @@ const StartScreen = () => {
 	const [numQuestions, setNumQuestions] = useState(5);
 
 	const start = (): void => {
-		gameCtx.onGameStartHandler(numQuestions);
+		gameCtx.gameStartHandler(numQuestions);
 	};
 
 	return (

@@ -21,8 +21,13 @@ export const GameScreen = () => {
 	const [isAnswered, setIsAnswered] = useState(false);
 	const [selectedAnswer, setSelectedAnswer] = useState('');
 
-	const { loadQuestions, numberOfQuestions, questions, error } =
-		useContext(GameContext);
+	const {
+		loadQuestions,
+		numberOfQuestions,
+		questions,
+		error,
+		addCorrectAnswers,
+	} = useContext(GameContext);
 
 	useEffect(() => {
 		loadQuestions(numberOfQuestions);
@@ -42,6 +47,10 @@ export const GameScreen = () => {
 		let isAnswerCorrect;
 		if (chosenAnswer) {
 			isAnswerCorrect = checkAnswer(chosenAnswer, correctAnswer);
+		}
+
+		if (isAnswerCorrect) {
+			addCorrectAnswers();
 		}
 	};
 

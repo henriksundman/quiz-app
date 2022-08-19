@@ -9,9 +9,11 @@ interface Props {
 export const GameContext = createContext<IGameState>({
 	isGameStarted: false,
 	numberOfQuestions: 5,
-	onGameStartHandler: (numQuestions: number) => {},
+	gameStartHandler: (numQuestions: number) => {},
 	numberOfCorrectAnswers: 0,
-	onAddCorrectAnswers: () => {},
+	addCorrectAnswers: () => {},
+	numberOfIncorrectAnswers: 0,
+	addIncorrectAnswers: () => {},
 	questions: [],
 	loadQuestions: (numQuestions: number) => {},
 	error: '',
@@ -21,16 +23,21 @@ export const GameContextProvider = ({ children }: Props) => {
 	const [isGameStarted, setIsGameStarted] = useState(false);
 	const [numberOfQuestions, setNumberOfQuestions] = useState(5);
 	const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0);
+	const [numberOfIncorrectAnswers, setNumberOfIncorrectAnswers] = useState(0);
 	const [questions, setQuestions] = useState<IQuestion[]>([]);
 	const [error, setError] = useState('');
 
-	const onGameStartHandler = (numQuestions: number): void => {
+	const gameStartHandler = (numQuestions: number): void => {
 		setIsGameStarted(true);
 		setNumberOfQuestions(numQuestions);
 	};
 
-	const onAddCorrectAnswers = (): void => {
+	const addCorrectAnswers = (): void => {
 		setNumberOfCorrectAnswers((prevNum: number) => prevNum + 1);
+	};
+
+	const addIncorrectAnswers = (): void => {
+		setNumberOfIncorrectAnswers((prevNum: number) => prevNum + 1);
 	};
 
 	const loadQuestions = useCallback(async (numberOfQuestions: number) => {
@@ -45,9 +52,11 @@ export const GameContextProvider = ({ children }: Props) => {
 	const value = {
 		isGameStarted,
 		numberOfQuestions,
-		onGameStartHandler,
+		gameStartHandler,
 		numberOfCorrectAnswers,
-		onAddCorrectAnswers,
+		addCorrectAnswers,
+		numberOfIncorrectAnswers,
+		addIncorrectAnswers,
 		questions,
 		loadQuestions,
 		error,

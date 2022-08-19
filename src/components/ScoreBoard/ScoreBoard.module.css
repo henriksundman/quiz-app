@@ -7,7 +7,6 @@
 }
 
 .checkmark {
-	display: flex;
 	width: 30px;
 	color: green;
 }
