@@ -17,21 +17,3 @@
 .btn:active {
 	transform: scale(0.95);
 }
-
-.correct,
-.correct:hover {
-	background-color: #50fa83;
-}
-
-.incorrect,
-.incorrect:hover {
-	background-color: #f95a5a;
-}
-
-.clicked {
-	border: 3px solid black;
-}
-
-.disabled {
-	pointer-events: none;
-}

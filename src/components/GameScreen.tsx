@@ -10,6 +10,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import { GameContext } from '../store/game-context';
 import { Answers } from './Answers';
 import { Question } from './Question';
+import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 
 const checkAnswer = (chosenAnswer: string, correctAnswer: string) => {
@@ -60,6 +61,7 @@ export const GameScreen = () => {
 					/>
 				</Fragment>
 			)}
+			{isAnswered && <Button>Next Question</Button>}
 		</Card>
 	);
 };

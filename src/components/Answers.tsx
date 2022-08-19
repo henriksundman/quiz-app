@@ -1,6 +1,7 @@
 import { Fragment, SyntheticEvent, useState } from 'react';
 
 import classes from './Answers.module.css';
+import { Button } from './ui/Button';
 
 interface AnswersProps {
 	correctAnswer: string;
@@ -43,9 +44,9 @@ export const Answers = ({
 					const isTheClickedButton = index === chosenAnswerIndex;
 
 					return (
-						<button
+						<Button
 							key={answer}
-							className={`${classes.btn} ${
+							customStyles={`${classes.btn} ${
 								isAnswered
 									? isCorrectAnswer
 										? classes.correct
@@ -53,11 +54,11 @@ export const Answers = ({
 									: ''
 							} ${
 								isAnswered ? (isTheClickedButton ? classes.clicked : '') : ''
-							}  `}
+							} ${isAnswered && classes.disabled} `}
 							onClick={onClickAnswer}
 						>
 							{answer}
-						</button>
+						</Button>
 					);
 				})}
 		</Fragment>
